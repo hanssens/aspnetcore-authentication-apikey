@@ -19,5 +19,13 @@ namespace AspNetCore.Authentication.ApiKey
 		/// This is required property. It is the name of the header or query parameter of the API Key.
 		/// </summary>
 		public string KeyName { get; set; }
+
+		/// <summary>
+		/// Indicates if the KeyName is mandatory and required in all requests. Defaults to false.
+		/// </summary>
+		/// <remarks>
+		/// Enabling this requires the use of the [Authorize] attribute.
+		/// </remarks>
+		public bool IsRequired { get; set; }
 	}
 }

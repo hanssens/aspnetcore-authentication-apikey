@@ -30,7 +30,9 @@ namespace AspNetCore.Authentication.ApiKey
 				if (!Request.Query.TryGetValue(Options.KeyName, out value))
 				{
 					// No Header or QueryParameter found
-					return AuthenticateResult.NoResult();
+					return Options.IsRequired 
+						? AuthenticateResult.Fail($"Missing required http header or query parameter '{Options.KeyName}'")
+						: AuthenticateResult.NoResult();
 				}
 			}
 

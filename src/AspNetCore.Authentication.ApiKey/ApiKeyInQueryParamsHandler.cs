@@ -27,8 +27,10 @@ namespace AspNetCore.Authentication.ApiKey
 		{
 			if (!Request.Query.TryGetValue(Options.KeyName, out var value))
 			{
-				// No ApiKey query parameter found
-				return AuthenticateResult.NoResult();
+				// No Header or QueryParameter found
+				return Options.IsRequired 
+					? AuthenticateResult.Fail($"Missing required query parameter '{Options.KeyName}'")
+					: AuthenticateResult.NoResult();
 			}
 
 			var key = value.FirstOrDefault();
